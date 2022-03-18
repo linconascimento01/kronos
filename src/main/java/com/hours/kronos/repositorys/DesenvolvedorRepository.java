@@ -1,11 +1,12 @@
 package com.hours.kronos.repositorys;
 
+import com.hours.kronos.models.DesenvolvedorModel;
 import com.hours.kronos.models.UsuarioModel;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UsuarioRepository extends CrudRepository<UsuarioModel, Integer> {
+public interface DesenvolvedorRepository extends CrudRepository<DesenvolvedorModel, Integer> {
 
-    UsuarioModel findByEmail(String email);
+    DesenvolvedorModel findByUsuario(UsuarioModel usuarioId);
 }

@@ -33,4 +33,8 @@ public class UsuarioModel {
 
     @Column(name = "perfil_id")
     private Integer perfilModel;
+
+    @OneToOne(mappedBy = "usuario")
+    @JoinColumn(name = "desenvolvedor_id", referencedColumnName = "desenvolvedor_id")
+    private DesenvolvedorModel desenvolvedor;
 }
