@@ -1,20 +1,18 @@
 package com.hours.kronos.models;
 
 
-import com.hours.kronos.constantes.ConstantesBD;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Data
+
 @Entity
+@Getter
+@Setter
 @Builder
-@Table(name = "usuario", schema = ConstantesBD.SCHEMA)
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "usuario", schema = "kronos_hours_db")
 public class UsuarioModel {
 
     @Id
@@ -34,7 +32,14 @@ public class UsuarioModel {
     @Column(name = "perfil_id")
     private Integer perfilModel;
 
-    @OneToOne(mappedBy = "usuario")
     @JoinColumn(name = "desenvolvedor_id", referencedColumnName = "desenvolvedor_id")
+    @OneToOne(mappedBy = "usuario", fetch = FetchType.LAZY)
     private DesenvolvedorModel desenvolvedor;
+
+    @JoinColumn(name = "consultoria_id", referencedColumnName = "consultoria_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private ConsultoriaModel consultoria;
+
+    @Column(name = "desenvolvedor_id")
+    private Integer desenvolvedorId;
 }

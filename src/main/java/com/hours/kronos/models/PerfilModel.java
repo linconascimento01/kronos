@@ -1,16 +1,21 @@
 package com.hours.kronos.models;
 
 import com.hours.kronos.constantes.ConstantesBD;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Data
+
+@Getter
+@Setter
 @Entity
-@Table(name = "perfil", schema = ConstantesBD.SCHEMA)
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "perfil", schema = "kronos_hours_db")
 public class PerfilModel {
 
     @Id

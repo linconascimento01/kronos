@@ -1,19 +1,18 @@
 package com.hours.kronos.models;
 
 import com.hours.kronos.constantes.ConstantesBD;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Data
+
+@Getter
+@Setter
 @Entity
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "desenvolvedores", schema = ConstantesBD.SCHEMA)
+@AllArgsConstructor
+@Table(name = "desenvolvedores", schema = "kronos_hours_db")
 public class DesenvolvedorModel {
 
     @Id
@@ -27,4 +26,16 @@ public class DesenvolvedorModel {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario_id", referencedColumnName = "usuario_id")
     private UsuarioModel usuario;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "squad_id")
+    private Squad squad;
+
+    public Squad getSquad() {
+        return squad;
+    }
+
+    public void setSquad(Squad squad) {
+        this.squad = squad;
+    }
 }

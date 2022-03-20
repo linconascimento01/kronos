@@ -4,6 +4,7 @@ package com.hours.kronos.services;
 import com.hours.kronos.models.DesenvolvedorModel;
 import com.hours.kronos.models.UsuarioModel;
 import com.hours.kronos.repositorys.DesenvolvedorRepository;
+import com.hours.kronos.repositorys.UsuarioRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,8 +19,15 @@ public class DesenvolvedorService {
     @Autowired
     DesenvolvedorRepository desenvolvedorRepository;
 
+    @Autowired
+    UsuarioRepository usuarioRepository;
+
     public DesenvolvedorModel save(DesenvolvedorModel desenvolvedorModel){
-        return desenvolvedorRepository.save(desenvolvedorModel);
+        UsuarioModel usuarioModel = desenvolvedorModel.getUsuario();
+        desenvolvedorModel = desenvolvedorRepository.save(desenvolvedorModel);
+        usuarioModel.setDesenvolvedorId(desenvolvedorModel.getDesenvolvedorId());
+        usuarioRepository.saveAndFlush(usuarioModel);
+        return desenvolvedorModel;
     }
 
     public DesenvolvedorModel findById(Integer desenvolvedorId){

@@ -1,4 +1,4 @@
-package com.hours.kronos;
+package com.hours.kronos.enums;
 
 import lombok.Getter;
 
@@ -8,7 +8,7 @@ public enum PerfilEnum {
     DESENVOLVEDOR(2),
     CLIENTE_EMPRESA(3);
 
-    private Integer value;
+    private final Integer value;
 
     PerfilEnum(Integer value) {
         this.value = value;
