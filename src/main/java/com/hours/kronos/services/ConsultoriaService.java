@@ -2,6 +2,7 @@ package com.hours.kronos.services;
 
 import com.hours.kronos.models.ConsultoriaModel;
 import com.hours.kronos.repositorys.ConsultoriaRepository;
+import com.hours.kronos.repositorys.UsuarioRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,9 @@ public class ConsultoriaService {
 
     @Autowired
     ConsultoriaRepository consultoriaRepository;
+
+    @Autowired
+    UsuarioRepository usuarioRepository;
 
     public ConsultoriaModel save(ConsultoriaModel consultoriaModel){
         return consultoriaRepository.save(consultoriaModel);

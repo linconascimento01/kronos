@@ -17,6 +17,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Table(name = "status_chamado")
 public class StatusChamado {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "status_id", nullable = false)
@@ -35,11 +36,4 @@ public class StatusChamado {
     @JoinColumn(name = "status_chamado_status_id")
     private List<Chamado> chamadoes = new ArrayList<>();
 
-    public List<Chamado> getChamadoes() {
-        return chamadoes;
-    }
-
-    public void setChamadoes(List<Chamado> chamadoes) {
-        this.chamadoes = chamadoes;
-    }
 }

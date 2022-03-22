@@ -42,4 +42,7 @@ public class UsuarioModel {
 
     @Column(name = "desenvolvedor_id")
     private Integer desenvolvedorId;
+
+    @Column(name = "consultoria_id")
+    private Integer consultoriaId;
 }

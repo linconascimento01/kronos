@@ -31,11 +31,4 @@ public class DesenvolvedorModel {
     @JoinColumn(name = "squad_id")
     private Squad squad;
 
-    public Squad getSquad() {
-        return squad;
-    }
-
-    public void setSquad(Squad squad) {
-        this.squad = squad;
-    }
 }
