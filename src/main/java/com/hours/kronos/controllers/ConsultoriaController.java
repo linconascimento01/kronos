@@ -2,6 +2,7 @@ package com.hours.kronos.controllers;
 
 import com.hours.kronos.DTOs.ConsultoriaDto;
 import com.hours.kronos.DTOs.UsuarioDto;
+import com.hours.kronos.exceptions.UsuarioNotFoundException;
 import com.hours.kronos.models.ConsultoriaModel;
 import com.hours.kronos.models.UsuarioModel;
 import com.hours.kronos.services.ConsultoriaService;
@@ -29,19 +30,29 @@ public class ConsultoriaController {
         ConsultoriaModel consultoriaModel = ConsultoriaDto.parseDtoInModel(consultoria);
         try {
             consultoriaModel = consultoriaService.save(consultoriaModel);
-            if(Objects.nonNull(consultoriaModel.getConsultoriaId())
-                    && Objects.nonNull(consultoria.getUsuarios())
+
+            if(Objects.isNull(consultoriaModel.getConsultoriaId())) throw new Exception();
+
+            if(Objects.nonNull(consultoria.getUsuarios())
                     && Objects.nonNull(consultoria.getUsuarios().get(0))){
 
                 UsuarioModel usuarioModel = usuarioService.findById(consultoria.getUsuarios().get(0).getUsuarioId());
-                usuarioModel.setConsultoria(consultoriaModel);
-                usuarioService.update(usuarioModel);
-                return ConsultoriaDto.parseModelInDto(consultoriaModel);
+
+                if(Objects.nonNull(usuarioModel)){
+                    usuarioModel.setConsultoria(consultoriaModel);
+                    usuarioService.update(usuarioModel);
+                    return ConsultoriaDto.parseModelInDto(consultoriaModel);
+                }
             }
-        }catch (Exception ex){
+            throw new UsuarioNotFoundException("Usuario não cadastrado");
+        }catch (UsuarioNotFoundException ex){
+            //deletar a consultoria que foi salva
+            consultoriaService.deleteById(consultoriaModel.getConsultoriaId());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "É necessário que tenham um usuario cadastrado", ex);
+        }
+        catch (Exception ex){
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Error", ex);
         }
-        return null;
     }
 
     @GetMapping("/consultoria/{id}")

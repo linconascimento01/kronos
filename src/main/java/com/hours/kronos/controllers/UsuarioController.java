@@ -1,9 +1,15 @@
 package com.hours.kronos.controllers;
 
 import com.hours.kronos.DTOs.UsuarioDto;
+import com.hours.kronos.exceptions.UsuarioNotFoundException;
+import com.hours.kronos.models.UsuarioModel;
 import com.hours.kronos.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.util.Objects;
 
 @CrossOrigin
 @RestController
@@ -20,7 +26,12 @@ public class UsuarioController {
 
     @PostMapping("/logar")
     private UsuarioDto getUsuario(@RequestBody UsuarioDto usuario) {
-        return UsuarioDto.parseModelInDto(usuarioService.findByEmailAndSenha(usuario.getEmail(), usuario.getSenha()));
+        try {
+            UsuarioModel usuarioModel = usuarioService.findByEmailAndSenha(usuario.getEmail(), usuario.getSenha());
+            return UsuarioDto.parseModelInDto(usuarioModel);
+        }catch (Exception ex){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario não cadastrado", ex);
+        }
     }
 
     @PostMapping("/usuario")
