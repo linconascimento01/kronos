@@ -23,11 +23,7 @@ public class DesenvolvedorService {
     UsuarioRepository usuarioRepository;
 
     public DesenvolvedorModel save(DesenvolvedorModel desenvolvedorModel){
-        UsuarioModel usuarioModel = desenvolvedorModel.getUsuario();
-        desenvolvedorModel = desenvolvedorRepository.save(desenvolvedorModel);
-        usuarioModel.setDesenvolvedorId(desenvolvedorModel.getDesenvolvedorId());
-        usuarioRepository.saveAndFlush(usuarioModel);
-        return desenvolvedorModel;
+        return desenvolvedorRepository.save(desenvolvedorModel);
     }
 
     public DesenvolvedorModel findById(Integer desenvolvedorId){

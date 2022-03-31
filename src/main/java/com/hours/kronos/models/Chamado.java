@@ -1,12 +1,10 @@
 package com.hours.kronos.models;
 
 import lombok.*;
-import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.time.Instant;
 import java.time.LocalDate;
-import java.util.Objects;
 
 @Getter
 @Setter
@@ -14,7 +12,6 @@ import java.util.Objects;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@RequiredArgsConstructor
 @Table(name = "chamados")
 public class Chamado {
 

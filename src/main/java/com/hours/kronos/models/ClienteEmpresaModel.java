@@ -31,4 +31,8 @@ public class ClienteEmpresaModel {
     @JoinColumn(name = "consultoria_id", referencedColumnName = "consultoria_id")
     private ConsultoriaModel consultoria;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_id", referencedColumnName = "usuario_id")
+    private UsuarioModel usuario;
+
 }

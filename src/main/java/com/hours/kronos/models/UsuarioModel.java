@@ -40,9 +40,8 @@ public class UsuarioModel {
     @ManyToOne(fetch = FetchType.LAZY)
     private ConsultoriaModel consultoria;
 
-    @Column(name = "desenvolvedor_id")
-    private Integer desenvolvedorId;
+    @JoinColumn(name = "cliente_empresa_id", referencedColumnName = "cliente_empresa_id")
+    @OneToOne(mappedBy = "usuario", fetch = FetchType.LAZY)
+    private ClienteEmpresaModel clienteEmpresa;
 
-    @Column(name = "consultoria_id")
-    private Integer consultoriaId;
 }

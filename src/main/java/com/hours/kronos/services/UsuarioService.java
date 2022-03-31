@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @AllArgsConstructor
@@ -22,6 +23,10 @@ public class UsuarioService {
         return null;
     }
 
+    public UsuarioModel update(UsuarioModel usuarioModel){
+       return usuarioRepository.save(usuarioModel);
+    }
+
     public UsuarioModel findById(Integer idUsuario){
         Optional<UsuarioModel> usuarioModel = usuarioRepository.findById(idUsuario);
         return usuarioModel.orElse(null);
@@ -34,10 +39,14 @@ public class UsuarioService {
     }
 
     public void delete(Integer idUsuario){
+
         usuarioRepository.deleteById(idUsuario);
     }
 
-    public UsuarioModel findByEmail(String email){
-        return usuarioRepository.findByEmail(email);
+    public UsuarioModel findByEmailAndSenha(String email, String senha){
+
+        return usuarioRepository.findByEmailAndSenha(email, senha);
     }
+
+
 }

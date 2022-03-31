@@ -25,6 +25,7 @@ public class ConsultoriaService {
     }
 
     public ConsultoriaModel findById(Integer id){
+
         return consultoriaRepository.findById(id).orElse(null);
     }
 
