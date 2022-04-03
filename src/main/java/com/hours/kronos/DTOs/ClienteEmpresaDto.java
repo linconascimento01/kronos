@@ -20,18 +20,24 @@ public class ClienteEmpresaDto implements Serializable {
     private final ConsultoriaDto consultoria;
 
     public static ClienteEmpresaDto parseModelInDto(ClienteEmpresaModel model){
+        ConsultoriaDto consultoriaDto =
+                (Objects.nonNull(model.getConsultoria()) &&
+                        Objects.nonNull(model.getConsultoria().getConsultoriaId()))
+                        ? ConsultoriaDto.parseModelInDto(model.getConsultoria())
+                        : null;
+
         return ClienteEmpresaDto.builder()
                 .id(model.getId())
                 .razaoSocial(model.getRazaoSocial())
                 .cnpj(model.getCnpj())
                 .usuario(UsuarioDto.parseModelInDto(model.getUsuario()))
-                .consultoria(ConsultoriaDto.parseModelInDto(model.getConsultoria()))
+                .consultoria(consultoriaDto)
                 .build();
     }
 
     public static ClienteEmpresaModel parseDtoInModel(ClienteEmpresaDto dto){
         ConsultoriaModel consultoriaModel =
-                (Objects.nonNull(dto.getConsultoria())
+                (Objects.nonNull(dto.getConsultoria()) && Objects.nonNull(dto.getConsultoria().getConsultoriaId())
                         ? ConsultoriaDto.parseDtoInModel(dto.getConsultoria())
                         : null);
 

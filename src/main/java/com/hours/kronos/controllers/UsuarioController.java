@@ -1,15 +1,15 @@
 package com.hours.kronos.controllers;
 
 import com.hours.kronos.DTOs.UsuarioDto;
-import com.hours.kronos.exceptions.UsuarioNotFoundException;
 import com.hours.kronos.models.UsuarioModel;
 import com.hours.kronos.services.UsuarioService;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Objects;
+
 
 @CrossOrigin
 @RestController
@@ -36,8 +36,10 @@ public class UsuarioController {
 
     @PostMapping("/usuario")
     private UsuarioDto save(@RequestBody UsuarioDto usuario) {
-        usuarioService.save(UsuarioDto.parseDtoInModel(usuario));
-        return usuario;
+        System.out.println("** PERFIL USUARIO = "+usuario.getPerfil());
+        UsuarioModel usuarioModel = UsuarioDto.parseDtoInModel(usuario);
+        usuarioModel = usuarioService.save(usuarioModel);
+        return UsuarioDto.parseModelInDto(usuarioModel);
     }
 
     @PutMapping("/usuario")

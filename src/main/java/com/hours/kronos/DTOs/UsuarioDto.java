@@ -39,17 +39,17 @@ public class UsuarioDto implements Serializable {
     }
 
     public static UsuarioModel parseDtoInModel(UsuarioDto dto){
-        Integer desenvolvdorId = null;
-        Integer consultoriaId = null;
-        if(Objects.nonNull(dto.getDesenvolvedorDto())
-                && Objects.nonNull(dto.getDesenvolvedorDto().getDesenvolvedorId())){
-            desenvolvdorId = dto.getDesenvolvedorDto().getDesenvolvedorId();
-        }
-
-        if(Objects.nonNull(dto.getConsultoriaDto())
-                && Objects.nonNull(dto.getConsultoriaDto().getConsultoriaId())){
-            consultoriaId = dto.getDesenvolvedorDto().getDesenvolvedorId();
-        }
+//        Integer desenvolvdorId = null;
+//        Integer consultoriaId = null;
+//        if(Objects.nonNull(dto.getDesenvolvedorDto())
+//                && Objects.nonNull(dto.getDesenvolvedorDto().getDesenvolvedorId())){
+//            desenvolvdorId = dto.getDesenvolvedorDto().getDesenvolvedorId();
+//        }
+//
+//        if(Objects.nonNull(dto.getConsultoriaDto())
+//                && Objects.nonNull(dto.getConsultoriaDto().getConsultoriaId())){
+//            consultoriaId = dto.getDesenvolvedorDto().getDesenvolvedorId();
+//        }
 
         return UsuarioModel.builder()
                 .nome(dto.getNome())
