@@ -2,6 +2,7 @@ package com.hours.kronos.models;
 
 import com.hours.kronos.constantes.ConstantesBD;
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,7 +17,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "perfil", schema = "kronos_hours_db")
-public class PerfilModel {
+public class PerfilModel implements GrantedAuthority {
 
     @Id
     @Column(name = "perfil_id")
@@ -24,4 +25,9 @@ public class PerfilModel {
 
     @Column(name = "nome")
     private String nome;
+
+    @Override
+    public String getAuthority() {
+        return this.nome;
+    }
 }

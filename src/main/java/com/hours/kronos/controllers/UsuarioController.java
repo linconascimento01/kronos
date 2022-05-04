@@ -3,12 +3,12 @@ package com.hours.kronos.controllers;
 import com.hours.kronos.DTOs.UsuarioDto;
 import com.hours.kronos.models.UsuarioModel;
 import com.hours.kronos.services.UsuarioService;
-import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 
 
 @CrossOrigin
@@ -20,9 +20,15 @@ public class UsuarioController {
     UsuarioService usuarioService;
 
     @GetMapping("/usuario/{idUsuario}")
-    private UsuarioDto getUsuario(@PathVariable Integer idUsuario) {
+    private UsuarioDto getUsuario(@RequestParam(value = "idUsuario") Long idUsuario) {
         return UsuarioDto.parseModelInDto(usuarioService.findById(idUsuario));
     }
+
+    @GetMapping("/usuario")
+    private List<UsuarioDto> getAll() {
+        return UsuarioDto.parseModelsInDtos(usuarioService.findAll());
+    }
+
 
     @PostMapping("/logar")
     private UsuarioDto getUsuario(@RequestBody UsuarioDto usuario) {
@@ -36,7 +42,6 @@ public class UsuarioController {
 
     @PostMapping("/usuario")
     private UsuarioDto save(@RequestBody UsuarioDto usuario) {
-        System.out.println("** PERFIL USUARIO = "+usuario.getPerfil());
         UsuarioModel usuarioModel = UsuarioDto.parseDtoInModel(usuario);
         usuarioModel = usuarioService.save(usuarioModel);
         return UsuarioDto.parseModelInDto(usuarioModel);

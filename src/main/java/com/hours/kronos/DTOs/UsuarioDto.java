@@ -3,6 +3,7 @@ package com.hours.kronos.DTOs;
 import com.hours.kronos.models.UsuarioModel;
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.Objects;
 @Data
 @Builder
 public class UsuarioDto implements Serializable {
-    private final Integer usuarioId;
+    private final Long usuarioId;
     private final String nome;
     private final String email;
     private final String senha;
@@ -61,15 +62,19 @@ public class UsuarioDto implements Serializable {
                 .build();
     }
 
-//    public static List<UsuarioDto> parseModelsInDtos(List<UsuarioModel> model){
-//        if(Objects.isNull(model)) return null;
-//
-//        List<UsuarioDto> usuarioDtos = new ArrayList<>();
-//            for (UsuarioModel m: model) {
-//                usuarioDtos.add(UsuarioDto.parseModelInDto(m));
-//            }
-//        return usuarioDtos;
-//    }
+    public UsernamePasswordAuthenticationToken converter() {
+        return new UsernamePasswordAuthenticationToken(this.email, this.senha);
+    }
+
+    public static List<UsuarioDto> parseModelsInDtos(List<UsuarioModel> model){
+        if(Objects.isNull(model)) return null;
+
+        List<UsuarioDto> usuarioDtos = new ArrayList<>();
+            for (UsuarioModel m: model) {
+                usuarioDtos.add(UsuarioDto.parseModelInDto(m));
+            }
+        return usuarioDtos;
+    }
 //
 //    public static List<UsuarioModel> parseDtosInModels(List<UsuarioDto> dtos){
 //        if(Objects.isNull(dtos)) return null;

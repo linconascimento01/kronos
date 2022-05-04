@@ -27,18 +27,16 @@ public class UsuarioService {
        return usuarioRepository.save(usuarioModel);
     }
 
-    public UsuarioModel findById(Integer idUsuario){
+    public UsuarioModel findById(Long idUsuario){
         Optional<UsuarioModel> usuarioModel = usuarioRepository.findById(idUsuario);
         return usuarioModel.orElse(null);
     }
 
     public List<UsuarioModel> findAll(){
-        List<UsuarioModel> usuarioModels = new ArrayList<>();
-        usuarioRepository.findAll().forEach(usuarioModels::add);
-        return usuarioModels;
+        return new ArrayList<>(usuarioRepository.findAll());
     }
 
-    public void delete(Integer idUsuario){
+    public void delete(Long idUsuario){
 
         usuarioRepository.deleteById(idUsuario);
     }
