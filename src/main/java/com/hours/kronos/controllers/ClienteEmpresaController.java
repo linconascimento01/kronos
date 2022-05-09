@@ -1,9 +1,11 @@
 package com.hours.kronos.controllers;
 
 import com.hours.kronos.DTOs.ClienteEmpresaDto;
+import com.hours.kronos.DTOs.ConsultoriaDto;
 import com.hours.kronos.exceptions.UsuarioNotFoundException;
 import com.hours.kronos.models.ClienteEmpresaModel;
 import com.hours.kronos.models.UsuarioModel;
+import com.hours.kronos.request.RequestSolicitarConsultoria;
 import com.hours.kronos.services.ClienteEmpresaService;
 import com.hours.kronos.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.Objects;
 
 @CrossOrigin
@@ -48,7 +51,21 @@ public class ClienteEmpresaController {
         }
     }
 
+    @GetMapping("/cliente-empresa/consultar/{id}")
     public ClienteEmpresaDto getClienteEmpresa(@RequestParam Integer id){
         return ClienteEmpresaDto.parseModelInDto(clienteEmpresaService.finedById(id));
     }
+
+    @GetMapping("/cliente-empresa/busca-por-consultoria/{id}")
+    public List<ClienteEmpresaDto> getClienteEmpresas(@PathVariable Integer id){
+        return clienteEmpresaService.findByIdConsultoria(id);
+    }
+
+
+    @PostMapping("cliente-empresa/solicitarConsultoria")
+    public ClienteEmpresaDto solicitarConsultoria(@RequestBody RequestSolicitarConsultoria request){
+        return clienteEmpresaService.solicitarConsultoria(request.getConsultoriaId(), request.getEmpresaId());
+    }
+
+
 }

@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.Objects;
 
 @CrossOrigin
@@ -60,4 +61,8 @@ public class ConsultoriaController {
         return ConsultoriaDto.parseModelInDto(consultoriaService.findById(id));
     }
 
+    @GetMapping("/consultoria")
+    public List<ConsultoriaDto> getConsultorias(){
+        return ConsultoriaDto.parseModelsInDtos(consultoriaService.findAll());
+    }
 }

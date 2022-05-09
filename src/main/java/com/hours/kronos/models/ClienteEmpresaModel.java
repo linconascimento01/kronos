@@ -27,6 +27,9 @@ public class ClienteEmpresaModel {
     @Column(name = "cnpj", length = 14)
     private String cnpj;
 
+    @Column(name = "flag_consultoria")
+    private Boolean flagConsultoria;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "consultoria_id", referencedColumnName = "consultoria_id")
     private ConsultoriaModel consultoria;

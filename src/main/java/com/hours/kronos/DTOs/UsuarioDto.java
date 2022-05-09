@@ -61,16 +61,16 @@ public class UsuarioDto implements Serializable {
                 .build();
     }
 
-//    public static List<UsuarioDto> parseModelsInDtos(List<UsuarioModel> model){
-//        if(Objects.isNull(model)) return null;
-//
-//        List<UsuarioDto> usuarioDtos = new ArrayList<>();
-//            for (UsuarioModel m: model) {
-//                usuarioDtos.add(UsuarioDto.parseModelInDto(m));
-//            }
-//        return usuarioDtos;
-//    }
-//
+    public static List<UsuarioDto> parseModelsInDtos(List<UsuarioModel> model){
+        if(Objects.isNull(model)) return null;
+
+        List<UsuarioDto> usuarioDtos = new ArrayList<>();
+            for (UsuarioModel m: model) {
+                usuarioDtos.add(UsuarioDto.parseModelInDto(m));
+            }
+        return usuarioDtos;
+    }
+
 //    public static List<UsuarioModel> parseDtosInModels(List<UsuarioDto> dtos){
 //        if(Objects.isNull(dtos)) return null;
 //

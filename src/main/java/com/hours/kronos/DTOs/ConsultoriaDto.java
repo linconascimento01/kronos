@@ -30,6 +30,12 @@ public class ConsultoriaDto implements Serializable {
                 .build();
     }
 
+    public static List<ConsultoriaDto> parseModelsInDtos(List<ConsultoriaModel> models){
+        List<ConsultoriaDto> listDTO = new ArrayList<>();
+        models.forEach(m -> listDTO.add(ConsultoriaDto.parseModelInDto(m)));
+        return listDTO;
+    }
+
     public static ConsultoriaModel parseDtoInModel(ConsultoriaDto dto){
         return ConsultoriaModel.builder()
                 .razaoSocial(dto.getRazaoSocial())

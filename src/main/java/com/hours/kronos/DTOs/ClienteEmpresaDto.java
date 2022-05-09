@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Data
@@ -30,7 +32,7 @@ public class ClienteEmpresaDto implements Serializable {
                 .id(model.getId())
                 .razaoSocial(model.getRazaoSocial())
                 .cnpj(model.getCnpj())
-                .usuario(UsuarioDto.parseModelInDto(model.getUsuario()))
+                //.usuario(UsuarioDto.parseModelInDto(model.getUsuario()))
                 .consultoria(consultoriaDto)
                 .build();
     }
@@ -53,5 +55,11 @@ public class ClienteEmpresaDto implements Serializable {
                 .usuario(usuarioModel)
                 .consultoria(consultoriaModel)
                 .build();
+    }
+
+    public static List<ClienteEmpresaDto> parseModelsInDtos(List<ClienteEmpresaModel> listModel){
+        List<ClienteEmpresaDto> clienteEmpresaDtos = new ArrayList<>();
+        listModel.forEach(model -> clienteEmpresaDtos.add(ClienteEmpresaDto.parseModelInDto(model)));
+        return clienteEmpresaDtos;
     }
 }
