@@ -20,7 +20,7 @@ public class UsuarioController {
     UsuarioService usuarioService;
 
     @GetMapping("/usuario/{idUsuario}")
-    private UsuarioDto getUsuario(@RequestParam(value = "idUsuario") Long idUsuario) {
+    private UsuarioDto getUsuario(@PathVariable Long idUsuario) {
         return UsuarioDto.parseModelInDto(usuarioService.findById(idUsuario));
     }
 
